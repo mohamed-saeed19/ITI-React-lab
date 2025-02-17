@@ -47,6 +47,12 @@ export default function Navbar() {
                     Logout
                   </p>
                 </li>
+                <li className="nav-item">
+              <NavLink to={"/cart"} className="nav-link" href="#">
+                <i className="fa-solid fa-cart-shopping fa-xl"></i>
+                <span className="badge bg-danger ms-1">{count}</span>
+              </NavLink>
+            </li>
               </>
             ) : (
               <>
@@ -62,12 +68,6 @@ export default function Navbar() {
                 </li>
               </>
             )}
-            <li className="nav-item">
-              <NavLink to={"/cart"} className="nav-link" href="#">
-                <i className="fa-solid fa-cart-shopping fa-xl"></i>
-                <span className="badge bg-danger ms-1">{count}</span>
-              </NavLink>
-            </li>
           </ul>
         </div>
       </div>
