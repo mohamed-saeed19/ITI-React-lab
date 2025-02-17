@@ -8,6 +8,7 @@ import Category from "./components/Category/Category";
 import Layout from "./components/Layout/Layout";
 import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
 import NotFound from "./components/NotFound/NotFound";
+import { ToastContainer } from "react-toastify";
 function App() {
   const router = createBrowserRouter([
     {
@@ -41,6 +42,8 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
+      <ToastContainer />
+
     </>
   );
 }

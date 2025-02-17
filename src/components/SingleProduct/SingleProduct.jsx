@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CounterContext } from "../../context/CounterContext";
+import { ToastContainer, toast } from 'react-toastify';
 export default function SingleProduct({ product }) {
   const { count, setCount } = useContext(CounterContext); 
   const addToCart = () => {
     setCount((prevCount) => prevCount + 1);
+    toast("Added To Card!")
   };
   return (
     <>
