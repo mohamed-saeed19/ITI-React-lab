@@ -26,6 +26,7 @@ export default function Login() {
       let { data } = await axios.post(`http://localhost:3000/auth/login`, values);
       console.log(data);
       if (data.message === "welcome to sara7a app") {
+      localStorage.setItem("userToken",data.token)
         navigate("/");
       }
     } catch (error) {
