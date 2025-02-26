@@ -1,25 +1,26 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./Home.css";
 import SingleProduct from "../SingleProduct/SingleProduct";
+import { fetchProducts } from "../../Redux/ProductSlice";
 
 export default function Home() {
-  const [products, setProducts] = useState([]); 
-  const [currentPage, setCurrentPage] = useState(1); 
-  const [productsPerPage] = useState(5);
-  async function getProducts() {
-    try {
-      const response = await axios.get("https://fakestoreapi.com/products");
-      setProducts(response.data); 
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    }
-  }
+  const dispatch = useDispatch();
+  const { products, loading, error } = useSelector((state) => state.products);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [productsPerPage] = React.useState(5);
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   const totalPages = Math.ceil(products.length / productsPerPage);
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -33,9 +34,8 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {
-    getProducts();
-  }, []);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <>
@@ -47,13 +47,21 @@ export default function Home() {
         ))}
       </div>
       <div className="pagination my-5 d-flex justify-content-center align-items-center">
-        <button onClick={handlePreviousPage} disabled={currentPage === 1} className="btn btn-outline-primary">
+        <button
+          onClick={handlePreviousPage}
+          disabled={currentPage === 1}
+          className="btn btn-outline-primary"
+        >
           Previous
         </button>
         <span className="mx-3">
           Page {currentPage} of {totalPages}
         </span>
-        <button onClick={handleNextPage} disabled={currentPage === totalPages} className="btn btn-outline-primary">
+        <button
+          onClick={handleNextPage}
+          disabled={currentPage === totalPages}
+          className="btn btn-outline-primary"
+        >
           Next
         </button>
       </div>
