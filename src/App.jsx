@@ -28,11 +28,11 @@ function App() {
         {
           index: true,
           element: (
-            <ProtectedRoutes>
+            // <ProtectedRoutes>
               <Suspense fallback={<div>Loading...</div>}>
                 <Home />
               </Suspense>
-            </ProtectedRoutes>
+            // </ProtectedRoutes>
           ),
         },
         {
@@ -46,21 +46,21 @@ function App() {
         {
           path: "/category",
           element: (
-            <ProtectedRoutes>
+            // <ProtectedRoutes>
               <Suspense fallback={<div>Loading...</div>}>
                 <Category />
               </Suspense>
-            </ProtectedRoutes>
+            // </ProtectedRoutes>
           ),
         },
         {
           path: "/product-details/:id",
           element: (
-            <ProtectedRoutes>
+            // <ProtectedRoutes>
               <Suspense fallback={<div>Loading...</div>}>
                 <SingleCard />
               </Suspense>
-            </ProtectedRoutes>
+            // </ProtectedRoutes>
           ),
         },
         {
